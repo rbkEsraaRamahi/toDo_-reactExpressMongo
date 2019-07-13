@@ -1,0 +1,23 @@
+{
+  "name": "todo_-reactexpressmongo",
+  "version": "1.0.0",
+  "description": "it is just quick review for the main stack (react-express-mongoDB), then I want to try new design libraries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbkEsraaRamahi/toDo_-reactExpressMongo.git"
+  },
+  "author": "Esraa AlRamahi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rbkEsraaRamahi/toDo_-reactExpressMongo/issues"
+  },
+  "homepage": "https://github.com/rbkEsraaRamahi/toDo_-reactExpressMongo#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
