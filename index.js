@@ -59,7 +59,7 @@ app.put('/', function(req, res){
 
 app.delete('/', function(req, res){
   var id = req.body._id;
-  ToDo.findOneAndDelete(id, function(err, doc){
+  ToDo.findByIdAndRemove(id, function(err, doc){
     if (err) {console.log(err) 
       return }
     return res.json(doc);
