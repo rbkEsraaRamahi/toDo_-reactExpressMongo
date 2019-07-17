@@ -4,7 +4,8 @@ const app = express()
 const port = 5000
 var mongoose = require('mongoose');
 const ToDo = require("./db");
- 
+mongoose.Promise = Promise;
+
 // parse application/json
 app.use(express.json());
 
@@ -13,20 +14,8 @@ app.use(cors())
 
 
 app.get('/', function(req, res){
-  ToDo.find({}, function(err, data){
-    if(err){
-        console.log(err);
-        return
-    }
-
-    if(data.length == 0) {
-        console.log("No record found")
-        return
-    }
-
-    console.log(data);
-    res.json(data)
-  })
+  ToDo.find().then((data)=>res.json(data))
+    .catch((err)=>console.log(err))  
 })
 
 app.post('/', function(req, res){

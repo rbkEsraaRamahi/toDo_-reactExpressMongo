@@ -11,13 +11,20 @@ class App extends React.Component {
       task: '',
       id:''
     }
+
+    this.getAll = this.getAll.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.add = this.add.bind(this);
+    this.add = this.add.bind(this);
     // this.edit = this.edit.bind(this);
     // this.delete = this.delete.bind(this);
   }
 
+  componentWillMount(){
+    console.log("willMount")
+  }
+
   componentDidMount(){
+    console.log("didMount")
     this.getAll();
   }
 
@@ -30,13 +37,12 @@ class App extends React.Component {
 
 
   handleChange(task){
-    console.log(task.target.value)
+    //console.log(task.target.value)
     this.setState({task:task.target.value})
-    // console.log("onchange",this.state.task)
   }
 
 add=(e)=>{
-  // e.preventDefault();
+   e.preventDefault();
  
   fetch('http://localhost:5000', {
     method: 'POST',
@@ -52,12 +58,15 @@ add=(e)=>{
 
 }
 
-edit(item){
-  var task = item.task
+edit=(item)=>{
+  //var task = item.task
   var id = item._id
-fetch('http://localhost:5000', {
+  
+  var pop = prompt("Please edit this task");
+  
+  return fetch('http://localhost:5000', {
   method: 'PUT',
-  body: JSON.stringify({id: id, task:task}),
+  body: JSON.stringify({_id: id, task:pop}),
   headers:{
     'Content-Type': 'application/json'
   }
@@ -69,15 +78,16 @@ fetch('http://localhost:5000', {
 
 delete=(item)=>{
   console.log(item._id)
-  return fetch('http://localhost:5000', {
+   fetch('http://localhost:5000', {
   method: 'DELETE',
-  body: JSON.stringify({_id: item._id}),
   headers:{
     'Content-Type': 'application/json'
-  }
+  },
+  body: JSON.stringify({_id: item._id})
+  
 }).then(res => res.json())
-.then(response => console.log('Success:', JSON.stringify(response)))
-.then(res=> this.getAll())
+return this.getAll()
+// .then(res=> this.getAll())
 .catch(error => console.error('Error:', error));
 }
 
@@ -86,12 +96,12 @@ delete=(item)=>{
       
       <div className="App">
         <header className="App-header">
-        <form>
+        <form onSubmit={this.add}>
     <label>
       new task:
-      <input type="text" name="task" onChange={this.handleChange}/>
+      <input type="text" name="task" value={this.state.input} onChange={this.handleChange}/>
     </label>
-    <input type="submit" value="Submit" onClick={this.add.bind(this)} />
+    <input type="submit" value="Submit" />
   </form>
 
   <ul>
